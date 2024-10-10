@@ -31,6 +31,27 @@ namespace Web_ban_hang.Controllers
             });
             return View(result);
         }
+        public IActionResult SortByPrice(int? loai)
+        {
+            var hangHoas = db.HangHoas.AsQueryable();
+
+            if (loai.HasValue)
+            {
+                hangHoas = hangHoas.Where(p => p.MaLoai == loai.Value);
+            }
+            
+            var result = hangHoas.Select(p => new HangHoaVM
+            {               
+                MaHH = p.MaHh,
+                TenHH = p.TenHh,
+                DonGia = p.DonGia ?? 0,
+                Hinh = p.Hinh ?? "",
+                MoTaNgan = p.MoTaDonVi ?? "",
+                TenLoai = p.MaLoaiNavigation.TenLoai
+
+            }).OrderBy(p => p.DonGia);
+            return View(result);
+        }
 
         public IActionResult Search(string? query)
         {

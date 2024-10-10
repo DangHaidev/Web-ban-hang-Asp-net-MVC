@@ -17,8 +17,8 @@ namespace Web_ban_hang.ViewComponents
                MaLoai = Loai.MaLoai,
                TenLoai = Loai.TenLoai,
                 SoLuong = Loai.HangHoas.Count
-            }).OrderBy(p => p.TenLoai);
-            return View(data);
+            }).OrderBy(p => p.TenLoai);          
+           return View(data);
         }
     }
 }
