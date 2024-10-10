@@ -273,3 +273,4 @@ D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\bin\Debug\net6.0\ru
 D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
 D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\bin\Debug\net6.0\System.Formats.Asn1.dll
