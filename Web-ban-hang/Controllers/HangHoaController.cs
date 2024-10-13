@@ -10,16 +10,25 @@ namespace Web_ban_hang.Controllers
         private readonly HDangShopContext db;
 
         public HangHoaController(HDangShopContext context) => db = context;
-        public IActionResult Index(int? loai)
+        public IActionResult Index(int? loai,int? sortList)
         {
+            ViewBag.Loai = loai;
             var hangHoas = db.HangHoas.AsQueryable();
 
             if (loai.HasValue)
             {
                 hangHoas = hangHoas.Where(p => p.MaLoai == loai.Value);
             }
-
-            var result = hangHoas.Select( p => new HangHoaVM
+            switch (sortList)
+            {
+                case 1:
+                    hangHoas = hangHoas.OrderBy(p => p.DonGia);
+                    break;
+                case 2:
+                    hangHoas = hangHoas.OrderByDescending(p => p.DonGia);
+                    break;
+            }
+                    var result = hangHoas.Select( p => new HangHoaVM
             {
                 MaHH = p.MaHh,
                 TenHH = p.TenHh,
