@@ -36,8 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFuZ0hvYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/HangHoa/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFuZ0hvYVxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/HangHoa/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFuZ0hvYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/HangHoa/ProductItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFuZ0hvYVxQcm9kdWN0SXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/HangHoa/Search.cshtml]
@@ -48,8 +56,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Home/PageNotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQYWdlTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Shared/Components/ListSale/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTGlzdFNhbGVcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Shared/Components/MenuLoai/Default.cshtml]
@@ -70,6 +86,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Shared/_LayoutCustomer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Shared/_TimKiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9UaW1LaWVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Shared/_ValidationScriptsPartial.cshtml]
