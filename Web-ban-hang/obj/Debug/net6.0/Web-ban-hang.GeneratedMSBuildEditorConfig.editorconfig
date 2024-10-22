@@ -10,11 +10,17 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Web_ban_hang
 build_property.RootNamespace = Web_ban_hang
 build_property.ProjectDir = D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = D:\University\HK1-Y3\Lập trình web\BaiTapLom\Web-ban-hang
 build_property._RazorSourceGeneratorDebug = 
+
+[D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/Cart/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
 
 [D:/University/HK1-Y3/Lập trình web/BaiTapLom/Web-ban-hang/Views/HangHoas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFuZ0hvYXNcQ3JlYXRlLmNzaHRtbA==

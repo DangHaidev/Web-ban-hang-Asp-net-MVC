@@ -22,10 +22,15 @@ namespace Web_ban_hang.Controllers
             switch (sortList)
             {
                 case 1:
-                    hangHoas = hangHoas.OrderBy(p => p.DonGia);
+                    hangHoas = hangHoas.OrderBy(p => p.TenHh);
                     break;
                 case 2:
+                    hangHoas = hangHoas.OrderBy(p => p.DonGia);
+                    break;
+                case 3:
                     hangHoas = hangHoas.OrderByDescending(p => p.DonGia);
+                    break;
+                default:
                     break;
             }
                     var result = hangHoas.Select( p => new HangHoaVM
