@@ -1,7 +1,10 @@
-﻿@{
+﻿
+@{
 	Layout = "_LayoutCustomer";
 }
-
+@{
+    var item = ViewBag.Loai;
+}
 <!-- Single Page Header start -->
 @RenderSection("BreadCrum", required: false)
 
@@ -15,24 +18,34 @@
                 <div class="row g-4">
                     <div class="col-xl-3">
                         <div class="input-group w-100 mx-auto d-flex">
-                            <form asp-action="Search" asp-controller="HangHoa" style="display:flex ; ">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" name="query">
-                                <button style=" border: none;background-color: #FFFFFF;">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                            </button>
-                            </form>
+                            @await Html.PartialAsync("_TimKiem")
                         </div>
                     </div>
                     <div class="col-6"></div>
                     <div class="col-xl-3">
-                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                            <label for="fruits">Default Sorting:</label>
+                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">                      
+                                <label for="fruits">Default Sorting:</label>
+                           @*  <form id="fruitform" method="get" asp-action="Index" asp-controller="HangHoa" asp-route-loai="@item">
+                                <input type="hidden" name="loai" value="@ViewBag.Loai" />
                             <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <option value="volvo">Nothing</option>
-                                <option value="saab">Popularity</option>
-                                <option value="opel">Organic</option>
-                                <option value="audi">Fantastic</option>
+                                <option  value="0">Nothing</option>
+                                <option value="1">Price</option>
+                                <option value="2">Des price</option>
+                                <option value="3"></option>
                             </select>
+                                <input type="submit" value="Apply" class="btn btn-primary">
+                            </form> *@
+
+                            <form method="get" asp-action="Index" asp-controller="HangHoa">
+                                <input type="hidden" name="loai" value="@ViewBag.Loai" />
+                                <select id="fruits" name="sortList" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
+                                    <option value="1">Nothing</option>
+                                    <option value="2">Price</option>
+                                    <option value="3">Des price</option>
+                                    <option value="4"></option>
+                                </select>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -76,63 +89,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <h4 class="mb-3">Featured products</h4>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                @await  Component.InvokeAsync("ListSale")
+
                                 <div class="d-flex justify-content-center my-4">
                                     <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
                                 </div>
@@ -162,4 +121,15 @@
         </div>
     </div>
 </div>
+
+@* <script>
+    document.getElementById('fruits').addEventListener('change', function () {
+        var selectedValue = this.value;
+
+        // Thực hiện hành động tùy thuộc vào giá trị được chọn
+        if (selectedValue) {
+            window.location.href = '/HangHoa/SortByPrice';
+        }
+    });
+</script> *@
 <!-- Fruits Shop End-->
