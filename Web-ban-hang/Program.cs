@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Web_ban_hang.Data;
+using Web_ban_hang.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICartService, CartService>();
+
 builder.Services.AddDbContext<HDangShopContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Upage"));
