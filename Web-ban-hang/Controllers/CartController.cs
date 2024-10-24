@@ -2,20 +2,29 @@
 using Web_ban_hang.Data;
 using Web_ban_hang.ViewModels;
 using Web_ban_hang.Helpers;
+using Web_ban_hang.Services;
 
 namespace Web_ban_hang.Controllers
 {
     public class CartController : Controller
     {
-        private readonly HDangShopContext db;
+        private readonly HDangShopContext db; // Để sử dụng context
+        private readonly ICartService _cartService; // Để sử dụng service
 
-        public CartController(HDangShopContext context) {
-        db = context;
+        // Constructor duy nhất kết hợp cả hai tham số
+        public CartController(HDangShopContext context, ICartService cartService)
+        {
+            db = context;
+            _cartService = cartService;
         }
+
+
         const string CART_KEY = "MYCART";
         public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(CART_KEY) ?? new List<CartItem>();
         public IActionResult Index()
         {
+            int cartItemCount = TotalCart();
+            _cartService.SetCartItemCount(cartItemCount);
             return View(Cart);
         }
         public IActionResult AddToCart(int id, int quantity = 1)
@@ -48,5 +57,35 @@ namespace Web_ban_hang.Controllers
             HttpContext.Session.Set(CART_KEY,gioHang);
             return RedirectToAction("Index");
         }
+        public IActionResult Remove(int id)
+        {
+            var gioHang = Cart;
+            var item = gioHang.SingleOrDefault(p => p.MaHh == id);
+            if (item != null)
+            {
+                gioHang.Remove(item);
+                HttpContext.Session.Set(CART_KEY, gioHang);
+
+            }
+            return RedirectToAction("Index");
+
+        }
+        public IActionResult Minus(int id)
+        {
+            var gioHang = Cart;
+            var item = gioHang.SingleOrDefault(p => p.MaHh == id);
+            if (item != null)
+            {
+                item.SoLuong--;
+                HttpContext.Session.Set(CART_KEY, gioHang);
+
+            }
+            return RedirectToAction("Index");
+
+        }
+        public int TotalCart()
+        {
+            return Cart.Count;
+        }      
     }
 }
