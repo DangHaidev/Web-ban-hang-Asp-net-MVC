@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Web_ban_hang.Data;
+using Web_ban_hang.Helpers;
 using Web_ban_hang.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
