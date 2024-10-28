@@ -85,6 +85,12 @@ namespace Web_ban_hang.Controllers
         }
         public int TotalCart()
         {
+            // nếu muốn trả về tất cả số lượng của các loại trong giổ hàg
+            //var soluong = Cart.Sum(p => p.SoLuong);
+            //return soluong;
+
+
+            // trả về số loại hàng
             return Cart.Count;
         }      
     }
