@@ -108,7 +108,9 @@
         <!-- Modal Search End -->
 
 
-        @RenderBody()
+        <div style="min-height:400px;" class="hero-header">
+            @RenderBody()
+        </div>
 
 
         @await Html.PartialAsync("_Footer")
