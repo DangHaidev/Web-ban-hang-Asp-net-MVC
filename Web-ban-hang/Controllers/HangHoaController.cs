@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Web_ban_hang.Data;
 using Web_ban_hang.ViewModels;
+using X.PagedList.Extensions;
 
 namespace Web_ban_hang.Controllers
 {
@@ -10,7 +11,7 @@ namespace Web_ban_hang.Controllers
         private readonly HDangShopContext db;
 
         public HangHoaController(HDangShopContext context) => db = context;
-        public IActionResult Index(int? loai,int? sortList)
+        public IActionResult Index(int? loai,int? sortList, int? page)
         {
             ViewBag.Loai = loai;
             var hangHoas = db.HangHoas.AsQueryable();
@@ -23,12 +24,15 @@ namespace Web_ban_hang.Controllers
             {
                 case 1:
                     hangHoas = hangHoas.OrderBy(p => p.TenHh);
+                    ViewBag.SortList = sortList;
                     break;
                 case 2:
                     hangHoas = hangHoas.OrderBy(p => p.DonGia);
+                    ViewBag.SortList = sortList;
                     break;
                 case 3:
                     hangHoas = hangHoas.OrderByDescending(p => p.DonGia);
+                    ViewBag.SortList = sortList;
                     break;
                 default:
                     break;
@@ -43,29 +47,37 @@ namespace Web_ban_hang.Controllers
                  TenLoai = p.MaLoaiNavigation.TenLoai
 
             });
-            return View(result);
-        }
-        public IActionResult SortByPrice(int? loai)
-        {
-            var hangHoas = db.HangHoas.AsQueryable();
 
-            if (loai.HasValue)
-            {
-                hangHoas = hangHoas.Where(p => p.MaLoai == loai.Value);
-            }
+            // Thực hiện phân trang
+            int pageSize = 9; // Số sản phẩm trên mỗi trang
+            int pageNumber = page ?? 1; // Trang hiện tại, mặc định là trang 1
+            var pagedResult = result.ToPagedList(pageNumber, pageSize);
+
+            return View(pagedResult);
+
+            //return View(result);
+        }
+        //public IActionResult SortByPrice(int? loai)
+        //{
+        //    var hangHoas = db.HangHoas.AsQueryable();
+
+        //    if (loai.HasValue)
+        //    {
+        //        hangHoas = hangHoas.Where(p => p.MaLoai == loai.Value);
+        //    }
             
-            var result = hangHoas.Select(p => new HangHoaVM
-            {               
-                MaHH = p.MaHh,
-                TenHH = p.TenHh,
-                DonGia = p.DonGia ?? 0,
-                Hinh = p.Hinh ?? "",
-                MoTaNgan = p.MoTaDonVi ?? "",
-                TenLoai = p.MaLoaiNavigation.TenLoai
+        //    var result = hangHoas.Select(p => new HangHoaVM
+        //    {               
+        //        MaHH = p.MaHh,
+        //        TenHH = p.TenHh,
+        //        DonGia = p.DonGia ?? 0,
+        //        Hinh = p.Hinh ?? "",
+        //        MoTaNgan = p.MoTaDonVi ?? "",
+        //        TenLoai = p.MaLoaiNavigation.TenLoai
 
-            }).OrderBy(p => p.DonGia);
-            return View(result);
-        }
+        //    }).OrderBy(p => p.DonGia);
+        //    return View(result);
+        //}
 
         public IActionResult Search(string? query)
         {
