@@ -10,24 +10,24 @@ using Web_ban_hang.ViewModels;
 
 namespace Web_ban_hang.Controllers
 {
-	public class KhachHangController : Controller
+	public class CustomerController : Controller
 	{
 		private readonly HDangShopContext db;
 		private readonly IMapper _mapper;
 
-		public KhachHangController(HDangShopContext context, IMapper mapper)
+		public CustomerController(HDangShopContext context, IMapper mapper)
 		{
 			db = context;
 			_mapper = mapper;
 		}
 		[HttpGet]
-		public IActionResult DangKy()
+		public IActionResult SignUp()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public IActionResult DangKy(RegisterVM model, IFormFile Hinh)
+		public IActionResult SignUp(RegisterVM model, IFormFile Hinh)
 		{
 			if (ModelState.IsValid)
 			{
@@ -61,14 +61,14 @@ namespace Web_ban_hang.Controllers
 
 		#region Login
 		[HttpGet]
-		public IActionResult DangNhap(string? ReturnUrl)
+		public IActionResult SignIn(string? ReturnUrl)
 		{
 			ViewBag.ReturnUrl = ReturnUrl;
 			return View();
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DangNhap(LoginVM model, string? ReturnUrl)
+		public async Task<IActionResult> SignIn(LoginVM model, string? ReturnUrl)
 		{
 			ViewBag.ReturnUrl = ReturnUrl;
 			if (ModelState.IsValid)
@@ -129,7 +129,7 @@ namespace Web_ban_hang.Controllers
 		}
 
 		[Authorize]
-		public async Task<IActionResult> DangXuat()
+		public async Task<IActionResult> LogOut()
 		{
 			await HttpContext.SignOutAsync();
 			return Redirect("/");

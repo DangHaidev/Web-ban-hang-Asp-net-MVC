@@ -29,7 +29,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
 {
-    options.LoginPath = "/KhachHang/DangNhap";
+    options.LoginPath = "/Customer/SignIn";
     options.AccessDeniedPath = "/AccessDenied"; 
 } 
 
@@ -59,5 +59,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Areas",
+    pattern: "{area:exists}/{controller=DataBoard}/{action=Index}/{id?}");
 
 app.Run();
