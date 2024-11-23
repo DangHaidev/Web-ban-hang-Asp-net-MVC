@@ -1,0 +1,42 @@
+﻿@model Web_ban_hang.ViewModels.InvoiceVM
+@{
+    ViewData["Title"] = "Invoice";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form asp-action="Invoice" asp-area="admin" asp-controller="Invoice" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <label>Mã hóa đơn</label>
+            <input type="text" class="form-control" placeholder="Số hóa đơn" value="@Model.MaHD" readonly>
+        </div>
+        <div class="col">
+            <label>Tên khách hàng</label>
+            <input type="text" class="form-control" placeholder="Tên khách hàng" value="@Model.HoTen" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Tên hàng hóa</label>
+        <input type="text" class="form-control" id="" placeholder="Tên hàng hóa" value="@Model.TenSP" asp-for="@Model.TenSP" readonly>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Số lượng</label>
+        <input type="text" class="form-control" id="" placeholder="Số lượng" value="@Model.SoLuong" asp-for="@Model.SoLuong">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Đơn giá</label>
+        <input type="text" class="form-control" id="" placeholder="Đơn giá" value="@Model.DonGia" asp-for="@Model.DonGia">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Trạng thái</label>
+        <input type="text" class="form-control" id="" placeholder="Trạng thái" value="@Model.TrangThai" asp-for="@Model.TrangThai">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Ghi chú</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="@Model.GhiChu">@Model.GhiChu</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</button>
+    <input type="hidden" asp-for="@Model.MaCT" />
+    <input type="hidden" value="@ViewBag.MaHD" />
+</form>
+

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Web_ban_hang.ViewModels.ChiTietHangHoaVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 1;
+}
+
+<h1>Product</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Loại</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng tồn</th>
+            <th scope="col">Hình</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+            <tr>               
+                <th scope="row">@i</th>
+                <td><a asp-area="admin" asp-controller="Product" asp-action="Detail" asp-route-id="@item.MaHH">@item.TenHH</a></td>
+                <td>@item.TenLoai</td>
+                <td>@item.DonGia $</td>
+                <td>@item.SoLuongTon</td>
+                <td><img src="~/Hinh/HangHoa/@item.Hinh" alt="@item.TenHH" width="100px" /></td>
+
+            </tr>
+            i++;
+        }
+        @* <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        </tr>
+        <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        </tr> *@
+    </tbody>
+</table>
+

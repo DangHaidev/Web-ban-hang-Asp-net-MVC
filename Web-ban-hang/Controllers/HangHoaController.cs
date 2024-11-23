@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Web_ban_hang.Data;
+using Web_ban_hang.Models.Entities;
 using Web_ban_hang.ViewModels;
 using X.PagedList.Extensions;
 

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Web_ban_hang.ViewModels.InvoiceVM>
+
+@{
+    ViewData["Title"] = "InvoiceDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 1;
+}
+<meta charset="UTF-8">
+
+<h1>InvoiceDetail</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            
+            <th scope="col">#</th>
+            <th scope="col">Số hóa đơn</th>
+            <th scope="col">Khách hàng</th>
+            <th scope="col">Ngày đặt</th>
+            <th scope="col">Ngày cần</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <th scope="row">@i</th>
+                <td><a asp-area="admin" asp-controller="DataBoard" asp-action="ViewOrder" asp-route-id="@item.MaHD">@item.MaHD</a></td>
+                <td>@item.HoTen</td>
+                <td>@item.NgayDat</td>
+                <td>@item.NgayCan</td>
+               
+                    @if (@item.TrangThai == 1)
+                    {
+                    <td>Đang giao</td>
+                } else
+                {
+                    <td>Chờ xác nhận</td>
+                }
+
+                 
+
+                @if(item.TrangThai == 0)
+                {
+                    <td><a type="button" class="btn btn-warning" asp-area="admin" asp-controller="DataBoard" asp-action="ViewOrder" asp-route-id="@item.MaHD">Xác nhận</a></td>
+                } else
+                {
+                    <td><a class="btn btn-sm btn-primary" asp-area="admin" asp-controller="DataBoard" asp-action="ViewOrder" asp-route-id="@item.MaHD">Detail</a></td>
+
+                }
+
+               
+            </tr>
+            i++;
+        }
+        @* <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        </tr>
+        <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        </tr> *@
+    </tbody>
+ </table>
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}

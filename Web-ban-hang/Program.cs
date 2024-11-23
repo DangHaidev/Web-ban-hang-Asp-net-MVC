@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Web_ban_hang.Data;
+using Web_ban_hang.Models.Entities;
 using Web_ban_hang.Helpers;
 using Web_ban_hang.Services;
 
@@ -56,12 +56,16 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.MapAreaControllerRoute(
+    name: "AdminArea",
+    areaName: "Admin",
+    pattern: "Admin/{controller=DataBoard}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "Areas",
-    pattern: "{area:exists}/{controller=DataBoard}/{action=Index}/{id?}");
+    name: "areas",
+        pattern: "{area:exists}/{controller=DataBoard}/{action=Index}/{id?}");
 
 app.Run();

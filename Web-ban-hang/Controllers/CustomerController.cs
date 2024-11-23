@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Web_ban_hang.Data;
+using Web_ban_hang.Models.Entities;
 using Web_ban_hang.Helpers;
 using Web_ban_hang.ViewModels;
 
@@ -45,7 +45,7 @@ namespace Web_ban_hang.Controllers
 				}
 
 				db.Add(khachHang);
-				db.SaveChanges();
+				//db.SaveChanges();
 
 				return RedirectToAction("Index", "HangHoa");
 				//}
