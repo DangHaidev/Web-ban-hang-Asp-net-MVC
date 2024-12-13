@@ -1,0 +1,17 @@
+﻿@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success notification" id="success-alert">
+        @TempData["Success"]
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger notification" id="error-alert">
+        @TempData["Error"]
+    </div>
+}
+<script>
+    setTimeout(function () {
+        document.querySelectorAll('.notification').forEach(el => el.style.display = 'none');
+    }, 3500); // Ẩn sau 3.5 giây
+</script>

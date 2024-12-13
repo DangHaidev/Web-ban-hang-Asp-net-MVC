@@ -1,42 +1,70 @@
-﻿@model IEnumerable<Web_ban_hang.ViewModels.HangHoaVM>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Web_ban_hang.ViewModels.HangHoaVM>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "_DanhSachHangHoa";
+	ViewData["Title"] = "Index";
+	Layout = "_DanhSachHangHoa";
 }
 
 
 
 <!-- Single Page Header start -->
 @section BreadCrum {
-<div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Shop</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Shop</li>
-    </ol>
-</div>
+	<div class="container-fluid page-header py-5">
+		<h1 class="text-center text-white display-6">Shop</h1>
+		<ol class="breadcrumb justify-content-center mb-0">
+			<li class="breadcrumb-item"><a href="#">Home</a></li>
+			<li class="breadcrumb-item"><a href="#">Pages</a></li>
+			<li class="breadcrumb-item active text-white">Shop</li>
+		</ol>
+	</div>
 }
 <!-- Single Page Header End -->
 <!-- Fruits Shop Start-->
-
 @* <h2>Có @Model.Count() sản phẩm </h2> *@
 
 
 @await Html.PartialAsync("ProductItem", Model)
 
 
+
 <div class="col-12">
-    <div class="pagination d-flex justify-content-center mt-5">
-        <a href="#" class="rounded">&laquo;</a>
-        <a href="#" class="active rounded">1</a>
-        <a href="#" class="rounded">2</a>
-        <a href="#" class="rounded">3</a>
-        <a href="#" class="rounded">4</a>
-        <a href="#" class="rounded">5</a>
-        <a href="#" class="rounded">6</a>
-        <a href="#" class="rounded">&raquo;</a>
-    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-5">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, loai = ViewBag.Loai, sortList = ViewBag.SortList }),
+                     new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                DisplayLinkToIndividualPages = true,
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                ActiveLiElementClass = "active"
+            })
+        </ul>
+    </nav>
 </div>
+
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center; /* Căn giữa các nút phân trang */
+    }
+
+        .pagination .page-item {
+            margin: 0 2px; /* Khoảng cách giữa các nút */
+        }
+
+    .active {   
+        padding : 5px 1px;
+    }
+
+
+</style>
+
 <!-- Fruits Shop End-->

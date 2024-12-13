@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Web_ban_hang.ViewModels.InvoiceVM>
+
+
+@{
+    ViewData["Title"] = "EditInvoice";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    if(@Model.FirstOrDefault().TrangThai == 0)
+    {
+        ViewBag.TrangThai = "Đang giao";
+    } else
+    {
+        ViewBag.TrangThai = "Chờ xác nhận";
+    }
+}
+
+<h1>Chỉnh sửa hóa đơn</h1>
+
+ 
+<div class="InfoCustomer">
+<div class="row">
+    <div class="col">
+        <label>Mã hóa đơn</label>
+        <input type="text" class="form-control" placeholder="Số hóa đơn" value="@ViewBag.MaHD"  readonly>
+    </div>
+    <div class="col">
+        <label>Tên khách hàng</label>
+        <input type="text" class="form-control"  placeholder="Tên khách hàng" value="@ViewBag.TenKH" readonly>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col" style="align-items : center; display :flex"> 
+    <label for="formGroupExampleInput2">Trạng thái</label>
+    @* <input type="text" class="form-control" id="" placeholder="Trạng thái" value="@Model.First().TrangThai"> *@
+
+            <select class="custom-select tm-select-accounts"
+                    id="category" asp-for="@Model.First().TrangThai">
+                <option>@ViewBag.TrangThai</option>
+                <option  >Đang giao</option>
+                <option>Chờ xác nhận</option>
+               @*  @foreach (var loai in ViewBag.DanhSachLoai)
+                {
+                    <option value="@loai.MaLoai">@loai.TenLoai</option>
+                } *@
+            </select>
+
+
+    </div>
+    <div class="col">
+        @if (@Model.First().TrangThai == 1)
+        {
+            <a asp-action="ConfirmInvoice" asp-controller="Invoice" asp-route-MaHD="@ViewBag.MaHD" type="button" class="btn btn-primary btn-block text-uppercase btnXacNhan">Xác nhận đơn hàng</a>
+        } else
+        {
+            <a asp-action="ConfirmInvoice" asp-controller="Invoice" asp-route-MaHD="@ViewBag.MaHD" type="button" class="btn btn-warning btn-block text-uppercase btnXacNhan">Xét đơn hàng</a>
+
+        }
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label>Ngày đặt</label>
+        <input type="text" class="form-control" placeholder="Số hóa đơn" value="@ViewBag.HoaDons.NgayDat" readonly>
+    </div>
+    <div class="col">
+        <label>Ngày cần</label>
+        <input type="text" class="form-control" placeholder="Tên khách hàng" value="@ViewBag.HoaDons.NgayCan" readonly>
+    </div>
+</div>
+
+<div class="row">
+    <label >Ghi chú</label>
+    <textarea class="form-control"  rows="3">@ViewBag.HoaDons.DiaChi</textarea>
+</div>
+
+</div>
+
+@{
+foreach(var item in Model)
+{
+
+    <form asp-action="EditInvoice" asp-area="admin" asp-controller="DataBoard" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Tên hàng hóa</label>
+        <input type="text" class="form-control" id="" placeholder="Tên hàng hóa" value="@item.TenSP" asp-for="@item.TenSP" readonly>
+    </div>
+    <div class="row">
+    <div class="col">
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Số lượng</label>
+                        <input type="text" class="form-control" id="quantity" placeholder="Số lượng" value="@item.SoLuong" asp-for="@item.SoLuong">
+    </div>
+                </div>
+                <div class="col">
+
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Đơn giá</label>
+                        <input type="text" class="form-control" id="price" placeholder="Đơn giá" value="@item.DonGia" asp-for="@item.DonGia">
+    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+
+                        <label>Giảm giá</label>
+                        <input class="form-control" type="text" id="discount" placeholder="Giảm giá"  value="@(item.GiamGia * 100)" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+
+                <label>Thành tiền</label>
+                        <input class="form-control" type="text" id="total" name="name" value="@((item.SoLuong * item.DonGia) * (1 - item.GiamGia))" readonly />
+                    </div>
+              </div>
+      </div>
+    
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Ghi chú</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="@item.GhiChu">@item.GhiChu</textarea>
+    </div>
+    <div class="btnUpdate">
+    <a asp-action="Invoice" asp-controller="Invoice" asp-route-id="@item.MaCT" type="button" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</a>
+            </div>
+    <input type="hidden" asp-for="@item.MaCT" />
+        <input type="hidden" value="@ViewBag.MaHD" />
+</form>
+}
+}
+
+
+<style>
+    form div {
+        padding: 10px;     
+    }
+    form {
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        margin : 15px 0px;
+    }
+    .btnXacNhan {
+        margin : 25px;
+    }
+    .btnUpdate {
+        padding : 10px;
+        text-align: center;
+    }
+
+    .InfoCustomer {
+        padding: 5px;
+        margin : 10px 20px;      
+    }
+
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const quantityInput = document.getElementById("quantity");
+        const priceInput = document.getElementById("price");
+        const discountInput = document.getElementById("discount");
+        const totalInput = document.getElementById("total");
+
+        function updateTotal() {
+            const quantity = parseFloat(quantityInput.value) || 0;
+            const price = parseFloat(priceInput.value) || 0;
+            const discount = parseFloat(discountInput.value) || 0;
+            totalInput.value = ((quantity * price) * ((100 - discount) / 100).toFixed(2);
+        }
+
+        // Add event listeners to recalculate total when quantity or price changes
+        quantityInput.addEventListener("input", updateTotal);
+        priceInput.addEventListener("input", updateTotal);
+        discountInput.addEventListener("input", updateTotal);
+    });
+</script>

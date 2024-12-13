@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Web_ban_hang.Data;
+using Web_ban_hang.Models.Entities;
 using Web_ban_hang.ViewModels;
 
 namespace Web_ban_hang.Helpers
@@ -8,6 +8,7 @@ namespace Web_ban_hang.Helpers
 	{
 		public AutoMapperProfile() {
 			CreateMap<RegisterVM, KhachHang>();
+			CreateMap<KhachHang, Customer>();
 		}
 
 	}

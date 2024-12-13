@@ -1,0 +1,310 @@
+﻿@model IEnumerable<Web_ban_hang.ViewModels.InvoiceVM>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div>
+	<a asp-controller="DataBoard" asp-action="ExportDailyReport" asp-route-date="@DateTime.Now.Date" class="btn btn-success">
+		Export Daily Report
+	</a>
+</div>
+
+<!-- Sale & Revenue Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-sm-6 col-xl-3">
+			<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+				<i class="fa fa-chart-line fa-3x text-primary"></i>
+				<div class="ms-3">
+					<p class="mb-2">Doanh thu ngày</p>
+					<h6 class="mb-0">$@ViewBag.Todaysale</h6>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-xl-3">
+			<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+				<i class="fa fa-chart-bar fa-3x text-primary"></i>
+				<div class="ms-3">
+					<p class="mb-2">Tổng doanh thu</p>
+					<h6 class="mb-0">$@ViewBag.Totalsale.ToString("F2")</h6>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-xl-3">
+			<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+				<i class="fa fa-chart-area fa-3x text-primary"></i>
+				<div class="ms-3">
+					<p class="mb-2">Tổng mặt hàng bán</p>
+					<h6 class="mb-0">@ViewBag.SoHH</h6>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-xl-3">
+			<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+				<i class="fa fa-chart-pie fa-3x text-primary"></i>
+				<div class="ms-3">
+					<p class="mb-2">Tổng đơn trong ngày</p>
+					<h6 class="mb-0">@ViewBag.TotalOrder</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Sale & Revenue End -->
+<!-- Sales Chart Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-sm-12 col-xl-6">
+			<div class="bg-light text-center rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h6 class="mb-0">Worldwide Sales</h6>
+					<a href="">Show All</a>
+				</div>
+				<canvas id="worldwide-sales"></canvas>
+			</div>
+		</div>
+		<div class="col-sm-12 col-xl-6">
+			<div class="bg-light text-center rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h6 class="mb-0">Salse & Revenue</h6>
+					<a href="">Show All</a>
+				</div>
+				<canvas id="salse-revenue"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Sales Chart End -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="bg-light text-center rounded p-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">Đơn hàng gần đây</h6>
+			<a asp-area="Admin" asp-controller="DataBoard" asp-action="InvoiceDetail">Xem tất cả</a>
+		</div>
+		<div class="table-responsive">
+			<table class="table text-start align-middle table-bordered table-hover mb-0">
+				<thead>
+					<tr class="text-dark">
+						<th scope="col"><input class="form-check-input" type="checkbox"></th>
+						<th scope="col">Ngày</th>
+						<th scope="col">Số hóa đơn</th>
+						<th scope="col">Khách hàng</th>
+						<th scope="col">Tổng tiền</th>
+						<th scope="col">Trạng thái</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td><input class="form-check-input" type="checkbox"></td>
+							<td>@item.NgayDat</td>
+							<td>@item.MaHD</td>
+							<td>@item.HoTen</td>
+							<td>@item.TongTien</td>
+							<td>Chờ xác nhận</td>
+							<td><a class="btn btn-sm btn-primary" asp-area="admin" asp-controller="DataBoard" asp-action="ViewOrder" asp-route-id="@item.MaHD">Xác nhận</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- Recent Sales End -->
+<!-- Widgets Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-sm-12 col-md-6 col-xl-4">
+			<div class="h-100 bg-light rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-2">
+					<h6 class="mb-0">Messages</h6>
+					<a href="">Show All</a>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-3">
+					<img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-0">Jhon Doe</h6>
+							<small>15 minutes ago</small>
+						</div>
+						<span>Short message goes here...</span>
+					</div>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-3">
+					<img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-0">Jhon Doe</h6>
+							<small>15 minutes ago</small>
+						</div>
+						<span>Short message goes here...</span>
+					</div>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-3">
+					<img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-0">Jhon Doe</h6>
+							<small>15 minutes ago</small>
+						</div>
+						<span>Short message goes here...</span>
+					</div>
+				</div>
+				<div class="d-flex align-items-center pt-3">
+					<img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-0">Jhon Doe</h6>
+							<small>15 minutes ago</small>
+						</div>
+						<span>Short message goes here...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6 col-xl-4">
+			<div class="h-100 bg-light rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h6 class="mb-0">Calender</h6>
+					<a href="">Show All</a>
+				</div>
+				<div id="calender"></div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6 col-xl-4">
+			<div class="h-100 bg-light rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h6 class="mb-0">To Do List</h6>
+					<a href="">Show All</a>
+				</div>
+				<div class="d-flex mb-2">
+					<input class="form-control bg-transparent" type="text" placeholder="Enter task">
+					<button type="button" class="btn btn-primary ms-2">Add</button>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-2">
+					<input class="form-check-input m-0" type="checkbox">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 align-items-center justify-content-between">
+							<span>Short task goes here...</span>
+							<button class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-2">
+					<input class="form-check-input m-0" type="checkbox">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 align-items-center justify-content-between">
+							<span>Short task goes here...</span>
+							<button class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-2">
+					<input class="form-check-input m-0" type="checkbox" checked>
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 align-items-center justify-content-between">
+							<span><del>Short task goes here...</del></span>
+							<button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex align-items-center border-bottom py-2">
+					<input class="form-check-input m-0" type="checkbox">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 align-items-center justify-content-between">
+							<span>Short task goes here...</span>
+							<button class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex align-items-center pt-2">
+					<input class="form-check-input m-0" type="checkbox">
+					<div class="w-100 ms-3">
+						<div class="d-flex w-100 align-items-center justify-content-between">
+							<span>Short task goes here...</span>
+							<button class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Widgets End -->
+
+
+<script>
+		// Dữ liệu từ ViewBag
+		var labels2 = @Html.Raw(Json.Serialize(ViewBag.LabelsC2));
+		var data2 = @Html.Raw(Json.Serialize(ViewBag.DataC2));
+
+		// Cấu hình biểu đồ
+			var ctx = document.getElementById('salse-revenue').getContext('2d');
+		var revenueChart = new Chart(ctx, {
+			type: 'line', // Loại biểu đồ
+			data: {
+				labels: labels2, // Nhãn x-axis (ngày)
+				datasets: [{
+					label: 'Doanh thu theo ngày (VNĐ)', // Tên biểu đồ
+					data: data2, // Dữ liệu doanh thu
+					backgroundColor: 'rgba(54, 162, 235, 0.6)', // Màu nền
+					borderColor: 'rgba(54, 162, 235, 1)', // Màu viền
+					borderWidth: 1 // Độ dày viền
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						display: true,
+						position: 'top'
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true // Bắt đầu từ 0
+					}
+				}
+			}
+		});
+
+		// Dữ liệu từ ViewBag
+		var labels = @Html.Raw(Json.Serialize(ViewBag.Labels));
+		var data = @Html.Raw(Json.Serialize(ViewBag.Data));
+
+		// Cấu hình biểu đồ
+			var ctx = document.getElementById('worldwide-sales').getContext('2d');
+		var revenueChart = new Chart(ctx, {
+			type: 'bar', // Loại biểu đồ
+			data: {
+				labels: labels, // Nhãn x-axis (ngày)
+				datasets: [{
+					label: 'Doanh thu theo ngày (VNĐ)', // Tên biểu đồ
+					data: data, // Dữ liệu doanh thu
+					backgroundColor: 'rgba(54, 162, 235, 0.6)', // Màu nền
+					borderColor: 'rgba(54, 162, 235, 1)', // Màu viền
+					borderWidth: 1 // Độ dày viền
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						display: true,
+						position: 'top'
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true // Bắt đầu từ 0
+					}
+				}
+			}
+		});
+
+</script>

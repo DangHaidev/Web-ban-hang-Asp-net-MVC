@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Web_ban_hang.Data;
+using Web_ban_hang.Models.Entities;
 using Web_ban_hang.Helpers;
 using Web_ban_hang.Services;
+using Web_ban_hang.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,10 @@ builder.Services.AddDbContext<HDangShopContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Upage"));
 });
+
+
+// add service send email
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -29,10 +34,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
 {
-    options.LoginPath = "/KhachHang/DangNhap";
+    options.LoginPath = "/Customer/SignIn";
     options.AccessDeniedPath = "/AccessDenied"; 
 } 
-
 );
 
 var app = builder.Build();
@@ -56,8 +60,16 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.MapAreaControllerRoute(
+    name: "AdminArea",
+    areaName: "Admin",
+    pattern: "Admin/{controller=DataBoard}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "areas",
+        pattern: "{area:exists}/{controller=DataBoard}/{action=Index}/{id?}");
 
 app.Run();

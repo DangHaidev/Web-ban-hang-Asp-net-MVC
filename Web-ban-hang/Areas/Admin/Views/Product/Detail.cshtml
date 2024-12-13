@@ -1,0 +1,150 @@
+﻿@model Web_ban_hang.ViewModels.ChiTietHangHoaVM
+
+@{
+	ViewData["Title"] = "Detail";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container tm-mt-big tm-mb-big">
+	<div class="row">
+		<div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+			<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="tm-block-title d-inline-block">Edit Product</h2>
+					</div>
+				</div>
+				<form asp-action="Detail" asp-area="admin" asp-controller="Product" method="post" enctype="multipart/form-data">
+				<div class="row tm-edit-product-row">
+
+					<div class="col-xl-6 col-lg-6 col-md-12">
+
+							<div class="form-group mb-3">
+								<label for="name">
+									Tên sản phẩm
+								</label>
+								<input 
+									   value="@Model.TenHH" 
+									   asp-for="@Model.TenHH"
+									   class="form-control validate" />
+							</div>
+							<div class="form-group mb-3">
+								<label for="description">Mô tả</label>
+								<textarea class="form-control validate tm-small"
+										  rows="5"
+										  asp-for="@Model.ChiTiet"
+										  required>@Model.ChiTiet</textarea>
+							</div>
+							<div class="form-group mb-3">
+							<label for="description">Đơn vị</label>
+							<textarea class="form-control validate tm-small"
+									  rows="2"
+									  asp-for="@Model.MoTaNgan"
+									  required>@Model.MoTaNgan</textarea>
+							</div>
+							<div class="form-group mb-3">
+								<label for="category">Danh mục</label>
+								<select class="custom-select tm-select-accounts"
+										id="category" asp-for="@Model.MaLoai">
+									<option>@Model.TenLoai</option>
+								@foreach (var loai in ViewBag.DanhSachLoai)
+								{
+				<option value="@loai.MaLoai">@loai.TenLoai</option>
+								}
+								</select>
+							</div>
+
+							<div class="form-group mb-3">
+								<label for="category">Nhà cung cấp</label>
+								<select class="custom-select tm-select-accounts"
+										id="category" asp-for="@Model.MaNcc">
+									<option>Chọn NCC</option>
+									@foreach (var loai in ViewBag.DanhSachNCC)
+									{
+										<option value="@loai.MaNcc">@loai.TenCongTy</option>
+									}
+								</select>
+							</div>
+
+							<div class="row">
+								
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Giá
+									</label>
+									<input 
+										  asp-for="@Model.DonGia"
+										   value=@Model.DonGia
+										   class="form-control validate" />
+								</div>
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Giảm giá
+									</label>
+									<input value="@(Model.GiamGia * 100)" asp-for="@Model.GiamGia"
+										   class="form-control validate" />
+								</div>
+
+
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Ngày cập nhật
+									</label>
+									<input type="datetime" asp-for="@Model.NgaySx"
+										   value=@Model.NgaySx
+										   class="form-control validate" />
+								</div>
+
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Trạng thái
+									</label>
+									<input class="form-check-input" type="checkbox" asp-for="TrangThai" />
+
+								</div>
+								<input type="hidden" asp-for="@Model.MaHH" />
+
+
+							</div>							
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+						<div class="tm-product-img-edit mx-auto">
+								<img id="previewImg" src="~/Hinh/HangHoa/@Model.Hinh" alt="Product image" class="img-fluid d-block mx-auto">
+							<i class="fas fa-cloud-upload-alt tm-upload-icon"
+							   onclick="document.getElementById('fileInput').click();"></i>
+						</div>
+						<div class="custom-file mt-3 mb-3">
+							@* <input id="fileInput" type="file" style="display:none;" /> *@
+								<input id="fileInput" type="file" name="Hinh" style="display:none;" onchange="previewImage(event)" />
+
+							<input type="button"
+								   class="btn btn-primary btn-block mx-auto"
+								   value="CHANGE IMAGE NOW"
+								   onclick="document.getElementById('fileInput').click();" />
+						</div>
+					</div>
+					@* <form action="" method="post" class="tm-edit-product-form"> *@
+					<div class="col-12">
+						<button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật ngay</button>
+					</div>
+					@* </form> *@
+				</div>				
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function previewImage(event) {
+		const file = event.target.files[0]; // Lấy file từ input
+		if (file) {
+			const reader = new FileReader(); // Tạo FileReader để đọc file
+			reader.onload = function (e) {
+				document.getElementById('previewImg').src = e.target.result; // Gán src cho ảnh
+			};
+			reader.readAsDataURL(file); // Đọc file dưới dạng DataURL
+		}
+	}
+</script>
