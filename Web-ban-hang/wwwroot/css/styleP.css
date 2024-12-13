@@ -1,0 +1,28 @@
+﻿.pagination {
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+    .pagination a {
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+    }
+
+.containerAddpro {
+    display: flex;
+    justify-content: space-between; /* Căn giữa các phần tử trên trục ngang, phần tử đầu tiên ở bên trái, phần tử thứ hai ở bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding:20px;
+}
+    .containerAddpro h2 {
+        margin: 0; /* Xóa khoảng cách mặc định xung quanh thẻ h2 */
+    }
+
+    .containerAddpro a {
+        text-decoration: none; /* Xóa gạch chân của thẻ a */
+        color: #007bff; /* Màu chữ của thẻ a */
+        font-size: 16px; /* Kích thước chữ của thẻ a */
+    }

@@ -1,0 +1,125 @@
+﻿@model Web_ban_hang.ViewModels.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container">
+    <div class="image-ctn">
+        <img id="previewImg" class="imgAva" src="~/Hinh/KhachHang/@Model.Hinh" width="150" />
+    </div>
+    <div>
+        <div>
+            <form asp-action="Edit" asp-area="admin" asp-controller="Customer" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="MaKh" class="control-label"></label>
+                    <input asp-for="MaKh" value="@Model.MaKh" class="form-control" readonly/>
+                    <span asp-validation-for="MaKh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MatKhau" class="control-label"></label>
+                    <input asp-for="MatKhau" class="form-control" />
+                    <span asp-validation-for="MatKhau" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HoTen" class="control-label"></label>
+                    <input asp-for="HoTen" class="form-control" />
+                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        @* <input class="form-check-input" asp-for="GioiTinh" /> @Html.DisplayNameFor(model => model.GioiTinh) *@
+                        <div>
+                            <input type="radio" asp-for="GioiTinh" value="true" id="gioiTinhNam" />
+                            <label for="gioiTinhNam">Nam</label>
+                        </div>
+                        <div>
+                            <input type="radio" asp-for="GioiTinh" value="false" id="gioiTinhNu" />
+                            <label for="gioiTinhNu">Nữ</label>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgaySinh" class="control-label"></label>
+                    <input asp-for="NgaySinh" class="form-control" />
+                    <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiaChi" class="control-label"></label>
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DienThoai" class="control-label"></label>
+                    <input asp-for="DienThoai" class="form-control" />
+                    <span asp-validation-for="DienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Hinh" class="control-label"></label>
+                    @* <input asp-for="Hinh" class="form-control" /> *@
+                    <input id="fileInput" type="file" name="Hinh" onchange="previewImage(event)" />
+                    <span asp-validation-for="Hinh" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HieuLuc" /> @Html.DisplayNameFor(model => model.HieuLuc)
+                    </label>
+                </div>             
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>     
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Customer" asp-controller="Databoard">Quay lại</a>
+</div>
+
+<style>
+    .container
+    {
+        width: 50%;
+        margin: 0 auto;
+        padding-top : 50px;
+        position:relative;
+    }
+
+    .image-ctn {
+        width : 150px;
+        position:absolute;
+        left : -170px;
+     }
+        .imgAva{
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+        }
+</style>
+
+
+@section Scripts {
+     <script>
+    function disalert()
+    {
+        Swal.fire("example!");
+    }
+ 
+            function previewImage(event) {
+                const file = event.target.files[0]; // Lấy file từ input
+            if (file) {
+                    const reader = new FileReader(); // Tạo FileReader để đọc file
+            reader.onload = function (e) {
+                document.getElementById('previewImg').src = e.target.result; // Gán src cho ảnh
+                    };
+            reader.readAsDataURL(file); // Đọc file dưới dạng DataURL
+                }
+            }
+</script>
+}

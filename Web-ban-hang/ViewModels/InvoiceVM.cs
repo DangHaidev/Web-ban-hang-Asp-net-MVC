@@ -17,6 +17,7 @@
         public string TenSP { get; set; }
         public double DonGia { get; set; }
         public int SoLuong { get; set; }
+        public double GiamGia { get; set; }
     }
 
     public class InvoiceDetailVM
@@ -28,5 +29,17 @@
         public double DonGia { get; set; }
         public int SoLuong { get; set; }
         public double GiamGia { get; set; }
+    }
+
+	public class CreateInvoice
+	{
+        public DateTime NgayDat { get; set; }
+        public string MaKH { get; set; }
+        public string DiaChi { get; set; }
+        public string CachThanhToan { get; set; } = null!;
+        public string CachVanChuyen { get; set; } = null!;
+        public double PhiVanChuyen { get; set; }
+        public int MaTrangThai { get; set; }
+        public string? GhiChu { get; set; }
     }
 }

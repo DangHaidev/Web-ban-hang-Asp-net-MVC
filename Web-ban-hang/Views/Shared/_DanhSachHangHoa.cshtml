@@ -25,16 +25,7 @@
                     <div class="col-xl-3">
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">                      
                                 <label for="fruits">Default Sorting:</label>
-                           @*  <form id="fruitform" method="get" asp-action="Index" asp-controller="HangHoa" asp-route-loai="@item">
-                                <input type="hidden" name="loai" value="@ViewBag.Loai" />
-                            <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <option  value="0">Nothing</option>
-                                <option value="1">Price</option>
-                                <option value="2">Des price</option>
-                                <option value="3"></option>
-                            </select>
-                                <input type="submit" value="Apply" class="btn btn-primary">
-                            </form> *@
+                          
 
                             <form method="get" asp-action="Index" asp-controller="HangHoa">
                                 <input type="hidden" name="loai" value="@ViewBag.Loai" />

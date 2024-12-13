@@ -14,4 +14,17 @@ namespace Web_ban_hang.ViewModels
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 	}
+
+	public class ForgotPass
+	{
+		[Required]
+		public string Email { get; set; }
+		
+		public string Code { get; set; }
+	}
+	public class rePass
+	{
+		[Required]
+		public string Pass { get; set; }
+	}
 }

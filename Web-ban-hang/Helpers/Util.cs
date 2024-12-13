@@ -11,7 +11,12 @@ namespace Web_ban_hang.Helpers
 			try
 			{
 				var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Hinh", folder, Hinh.FileName);
-				using (var myfile = new FileStream(fullPath, FileMode.CreateNew))
+                // xử lú truonef hợp đã tồn tại thư mục trong folder
+                //if (!Directory.Exists(folderPath))
+                //{
+                //    Directory.CreateDirectory(folderPath);
+                //}
+                using (var myfile = new FileStream(fullPath, FileMode.CreateNew))
 				{
 					Hinh.CopyTo(myfile);
 				}
@@ -19,9 +24,8 @@ namespace Web_ban_hang.Helpers
 			}
 			catch (Exception ex)
 			{
-				return string.Empty;
+				return Hinh.FileName;
 			}
-
 		}
 
 		public static string GenerateRamdomKey(int length = 5)

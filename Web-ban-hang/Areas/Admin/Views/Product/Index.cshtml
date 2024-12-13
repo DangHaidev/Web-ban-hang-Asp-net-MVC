@@ -1,12 +1,27 @@
-﻿@model IEnumerable<Web_ban_hang.ViewModels.ChiTietHangHoaVM>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Web_ban_hang.ViewModels.ChiTietHangHoaVM>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    int i = 1;
-}
+        int i = 1;
 
-<h1>Product</h1>
+    if(ViewBag.page > 1)
+    {
+         i = 1 + ViewBag.page* 10;
+
+    }
+}
+<div class="containerAddpro" >
+    <div>
+<h2>Số sản phẩm : @ViewBag.TotalProduct</h2>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="AddProduct" asp-controller="Product" asp-area="Admin">Thêm sản phẩm</a>
+</div>
+</div>
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -14,8 +29,9 @@
             <th scope="col">Tên sản phẩm</th>
             <th scope="col">Loại</th>
             <th scope="col">Giá</th>
-            <th scope="col">Số lượng tồn</th>
+            @* <th scope="col">Số lượng tồn</th> *@
             <th scope="col">Hình</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,23 +43,24 @@
                 <td><a asp-area="admin" asp-controller="Product" asp-action="Detail" asp-route-id="@item.MaHH">@item.TenHH</a></td>
                 <td>@item.TenLoai</td>
                 <td>@item.DonGia $</td>
-                <td>@item.SoLuongTon</td>
+                @* <td>@item.SoLuongTon</td> *@
                 <td><img src="~/Hinh/HangHoa/@item.Hinh" alt="@item.TenHH" width="100px" /></td>
+                @if (item.TrangThai == true)
+                {
+                    <td><a class="btn btn-warning" asp-action="HideProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.MaHH">Ẩn</a></td>
+                } else
+                {
+                    <td><a class="btn btn-primary" asp-action="HideProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.MaHH">Mở bán</a></td>
+
+                }
 
             </tr>
             i++;
-        }
-        @* <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        </tr> *@
+        }        
     </tbody>
 </table>
 
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index","Product", new { page }))
+</div>

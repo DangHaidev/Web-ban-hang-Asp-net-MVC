@@ -24,6 +24,7 @@ namespace Web_ban_hang.Models.Entities
         public int SoLanXem { get; set; }
         public string? MoTa { get; set; }
         public string MaNcc { get; set; } = null!;
+        public bool TrangThai { get; set; }
 
         public virtual Loai MaLoaiNavigation { get; set; } = null!;
         public virtual NhaCungCap MaNccNavigation { get; set; } = null!;

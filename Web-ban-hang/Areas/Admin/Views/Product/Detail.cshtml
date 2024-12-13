@@ -54,18 +54,21 @@
 								}
 								</select>
 							</div>
+
+							<div class="form-group mb-3">
+								<label for="category">Nhà cung cấp</label>
+								<select class="custom-select tm-select-accounts"
+										id="category" asp-for="@Model.MaNcc">
+									<option>Chọn NCC</option>
+									@foreach (var loai in ViewBag.DanhSachNCC)
+									{
+										<option value="@loai.MaNcc">@loai.TenCongTy</option>
+									}
+								</select>
+							</div>
+
 							<div class="row">
-								@* <div class="form-group mb-3 col-xs-12 col-sm-6">
-									<label for="expire_date">
-										Expire Date
-									</label>
-									<input id="expire_date"
-										   name="expire_date"
-										   type="text"
-										   value="22 Oct, 2020"
-										   class="form-control validate"
-										   data-large-mode="true" />
-								</div> *@
+								
 								<div class="form-group mb-3 col-xs-12 col-sm-6">
 									<label for="stock">
 										Giá
@@ -75,7 +78,31 @@
 										   value=@Model.DonGia
 										   class="form-control validate" />
 								</div>
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Giảm giá
+									</label>
+									<input value="@(Model.GiamGia * 100)" asp-for="@Model.GiamGia"
+										   class="form-control validate" />
+								</div>
 
+
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Ngày cập nhật
+									</label>
+									<input type="datetime" asp-for="@Model.NgaySx"
+										   value=@Model.NgaySx
+										   class="form-control validate" />
+								</div>
+
+								<div class="form-group mb-3 col-xs-12 col-sm-6">
+									<label for="stock">
+										Trạng thái
+									</label>
+									<input class="form-check-input" type="checkbox" asp-for="TrangThai" />
+
+								</div>
 								<input type="hidden" asp-for="@Model.MaHH" />
 
 

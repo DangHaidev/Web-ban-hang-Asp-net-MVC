@@ -8,6 +8,7 @@ namespace Web_ban_hang.Helpers
 	{
 		public AutoMapperProfile() {
 			CreateMap<RegisterVM, KhachHang>();
+			CreateMap<KhachHang, Customer>();
 		}
 
 	}

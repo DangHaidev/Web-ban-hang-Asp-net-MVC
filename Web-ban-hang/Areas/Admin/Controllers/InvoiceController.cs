@@ -11,8 +11,6 @@ namespace Web_ban_hang.Areas.Admin.Controllers
     {
         private readonly HDangShopContext db; // Để sử dụng context
 
-
-        // Constructor duy nhất kết hợp cả hai tham số
         public InvoiceController(HDangShopContext context)
         {
             db = context;
@@ -35,6 +33,7 @@ namespace Web_ban_hang.Areas.Admin.Controllers
                 TenSP = data.MaHhNavigation.TenHh,
                 SoLuong = data.SoLuong,
                 DonGia = data.DonGia,
+                GiamGia = data.GiamGia,
             };
             return View(result);
         }
@@ -46,6 +45,8 @@ namespace Web_ban_hang.Areas.Admin.Controllers
 
             //data.MaHdNavigation.HoTen = model.HoTen;
             data.SoLuong = model.SoLuong;
+           model.GiamGia = model.GiamGia / 100;
+            data.GiamGia = model.GiamGia;
             data.DonGia = model.DonGia;
             data.MaHdNavigation.MaTrangThai = model.TrangThai;
             data.MaHdNavigation.GhiChu = model.GhiChu;

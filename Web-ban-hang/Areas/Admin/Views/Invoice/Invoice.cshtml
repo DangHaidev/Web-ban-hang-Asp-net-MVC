@@ -15,17 +15,56 @@
             <input type="text" class="form-control" placeholder="Tên khách hàng" value="@Model.HoTen" readonly>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <label>Ngày đặt</label>
+            <input type="text" class="form-control" placeholder="Số hóa đơn" value="@Model.NgayDat" readonly>
+        </div>
+        <div class="col">
+            <label>Ngày cần</label>
+            <input type="text" class="form-control" placeholder="Tên khách hàng" value="@Model.NgayCan" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <label>Địa chỉ khách hàng</label>
+        <textarea style="margin:20px" class="form-control" rows="3">@Model.DiaChi</textarea>
+    </div>
+
     <div class="form-group">
         <label for="formGroupExampleInput">Tên hàng hóa</label>
         <input type="text" class="form-control" id="" placeholder="Tên hàng hóa" value="@Model.TenSP" asp-for="@Model.TenSP" readonly>
     </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput2">Số lượng</label>
-        <input type="text" class="form-control" id="" placeholder="Số lượng" value="@Model.SoLuong" asp-for="@Model.SoLuong">
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput2">Đơn giá</label>
-        <input type="text" class="form-control" id="" placeholder="Đơn giá" value="@Model.DonGia" asp-for="@Model.DonGia">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Số lượng</label>
+                <input type="text" class="form-control" id="quantity" placeholder="Số lượng" value="@Model.SoLuong" asp-for="@Model.SoLuong">
+            </div>
+        </div>
+        <div class="col">
+
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Đơn giá</label>
+                <input type="text" class="form-control" id="price" placeholder="Đơn giá" value="@Model.DonGia" asp-for="@Model.DonGia">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+
+                <label>Giảm giá</label>
+                <input class="form-control" type="text" id="discount" placeholder="Giảm giá" asp-for="@Model.GiamGia" value="@(Model.GiamGia * 100)" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+
+                <label>Thành tiền</label>
+                <input class="form-control" type="text" id="total" name="name" value="@((Model.SoLuong * Model.DonGia) * (1 - Model.GiamGia))" readonly /> 
+            </div>
+        </div>
+        
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Trạng thái</label>
@@ -40,3 +79,31 @@
     <input type="hidden" value="@ViewBag.MaHD" />
 </form>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const quantityInput = document.getElementById("quantity");
+        const priceInput = document.getElementById("price");
+        const discountInput = document.getElementById("discount");
+        const totalInput = document.getElementById("total");
+
+        function updateTotal() {
+            const quantity = parseFloat(quantityInput.value) || 0;
+            const price = parseFloat(priceInput.value) || 0;
+            const discount = parseFloat(discountInput.value) || 0;
+            totalInput.value = ((quantity * price) * ((100 - discount) / 100)).toFixed(2);
+        }
+
+        // Add event listeners to recalculate total when quantity or price changes
+        quantityInput.addEventListener("input", updateTotal);
+        priceInput.addEventListener("input", updateTotal);
+        discountInput.addEventListener("input", updateTotal);
+    });
+</script>
+
+<style>
+    form div  {
+        margin : 0 10px;
+        padding : 5px;
+    }
+
+</style>

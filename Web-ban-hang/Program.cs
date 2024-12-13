@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Web_ban_hang.Models.Entities;
 using Web_ban_hang.Helpers;
 using Web_ban_hang.Services;
+using Web_ban_hang.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,10 @@ builder.Services.AddDbContext<HDangShopContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Upage"));
 });
+
+
+// add service send email
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -32,7 +37,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.LoginPath = "/Customer/SignIn";
     options.AccessDeniedPath = "/AccessDenied"; 
 } 
-
 );
 
 var app = builder.Build();

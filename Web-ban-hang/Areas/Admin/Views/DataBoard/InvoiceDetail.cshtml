@@ -1,13 +1,19 @@
-﻿@model IEnumerable<Web_ban_hang.ViewModels.InvoiceVM>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Web_ban_hang.ViewModels.InvoiceVM>
 
 @{
     ViewData["Title"] = "InvoiceDetail";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     int i = 1;
+
+    if(ViewBag.page > 1)
+    {
+         i = 1 + ViewBag.page* 10;
+
+    }
 }
 <meta charset="UTF-8">
-
-<h1>InvoiceDetail</h1>
 
 <table class="table table-hover">
     <thead>
@@ -43,7 +49,7 @@
 
                  
 
-                @if(item.TrangThai == 0)
+                @if(item.TrangThai == 1)
                 {
                     <td><a type="button" class="btn btn-warning" asp-area="admin" asp-controller="DataBoard" asp-action="ViewOrder" asp-route-id="@item.MaHD">Xác nhận</a></td>
                 } else
@@ -56,17 +62,7 @@
             </tr>
             i++;
         }
-        @* <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        </tr> *@
+       
     </tbody>
  </table>
 
@@ -76,3 +72,9 @@
         alert('@TempData["Message"]');
     </script>
 }
+
+
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("InvoiceDetail","DataBoard", new { page }))
+</div>
